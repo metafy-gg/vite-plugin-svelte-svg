@@ -1,12 +1,10 @@
 # Vite Svelte SVG
 
----
-
 Vite 2.x plugin to transform SVGs into Svelte components.
 
 It also optimizes your SVGs by running them thru [svgo](https://github.com/svg/svgo).
 
-[badges]
+![npm](https://img.shields.io/npm/v/vite-plugin-svelte-svg)
 
 ```svelte
 <script>
@@ -65,7 +63,7 @@ module.exports = {
 
 ## Credits
 
-This plugin exists because of these great plugins:
+This plugin is based on the work from the following projects:
 
 - https://github.com/codefeathers/rollup-plugin-svelte-svg
 - https://github.com/visualfanatic/vite-svg
