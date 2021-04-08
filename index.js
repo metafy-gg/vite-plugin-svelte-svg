@@ -1,4 +1,4 @@
-const fs = require("fs").promises;
+const fs = require("fs");
 const { optimize } = require("svgo");
 const svelte = require("svelte/compiler");
 
@@ -13,8 +13,8 @@ function compileSvg(source, filename, ssr) {
   return { code };
 }
 
-async function optimizeSvg(content, path, config = {}) {
-  const { data } = await optimize(content, {
+function optimizeSvg(content, path, config = {}) {
+  const { data } = optimize(content, {
     ...config,
     path,
   });
@@ -24,18 +24,28 @@ async function optimizeSvg(content, path, config = {}) {
 module.exports = (options = {}) => {
   const { svgoConfig } = options;
   const svgRegex = /\.svg(?:\?(component))?$/;
+  const splitRegex = /(<svg.*?)(\/?>.*)/;
 
   return {
     name: "svelte-svg",
-    async transform(source, id, ssr) {
+    transform(_, id, ssr) {
       const result = id.match(svgRegex);
       if (result) {
         const type = result[1];
         if (type === "component") {
           const idWithoutQuery = id.replace(".svg?component", ".svg");
-          const code = await fs.readFile(idWithoutQuery);
-          const svg = await optimizeSvg(code, idWithoutQuery, svgoConfig);
-          return await compileSvg(svg, idWithoutQuery, ssr);
+          const code = fs.readFileSync(idWithoutQuery);
+          let svg = optimizeSvg(code, idWithoutQuery, svgoConfig);
+          // Support any custom attributes
+          const parts = splitRegex.exec(svg);
+          if (parts === null) {
+            console.error("[vite-plugin-svelte-svg] Failed to parse:", idWithoutQuery);
+          } else {
+            const [_, head, body] = parts;
+            svg = `${head} {...$$props}${body}`;
+          }
+          // Compile with Svelte
+          return compileSvg(svg, idWithoutQuery, ssr);
         }
       }
       return null;
