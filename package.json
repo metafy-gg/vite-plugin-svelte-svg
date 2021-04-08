@@ -1,0 +1,32 @@
+{
+  "name": "vite-plugin-svelte-svg",
+  "version": "1.0.0",
+  "description": "Vite 2.x plugin to load SVG files as Svelte components",
+  "main": "index.js",
+  "dependencies": {
+    "svgo": "^2.3.0"
+  },
+  "devDependencies": {
+    "svelte": "^3.37.0"
+  },
+  "peerDependencies": {
+    "svelte": "^3.37.0",
+    "vite": "^2.1.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metafy-gg/vite-plugin-svelte-svg.git"
+  },
+  "keywords": [
+    "vite-plugin"
+  ],
+  "author": "Metafy <engineering@metafy.gg>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/metafy-gg/vite-plugin-svelte-svg/issues"
+  },
+  "homepage": "https://github.com/metafy-gg/vite-plugin-svelte-svg#readme"
+}
