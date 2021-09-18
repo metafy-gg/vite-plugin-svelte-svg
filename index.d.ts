@@ -3,6 +3,11 @@ import type { OptimizeOptions } from 'svgo'
 
 type Options = {
 	svgoConfig: OptimizeOptions
+	/**
+	 * Requires the use of ".svg?component" instead of just ".svg"
+	 * @default true
+	 */
+	requireSuffix: boolean
 }
 
 type Return = {
