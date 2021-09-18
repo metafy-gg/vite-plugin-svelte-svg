@@ -1,4 +1,4 @@
-import type { SvelteComponent } from 'svelte'
+import type { SvelteComponent } from 'svelte/internal'
 import type { OptimizeOptions } from 'svgo'
 
 type Options = {
