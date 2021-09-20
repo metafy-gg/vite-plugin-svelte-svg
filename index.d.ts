@@ -1,4 +1,3 @@
-import type { SvelteComponent } from 'svelte/internal'
 import type { OptimizeOptions } from 'svgo'
 
 type Options = {
@@ -14,7 +13,5 @@ type Return = {
 	name: string
 	transform: (code: string, id: string, ssr?: boolean) => null|{ code: string }
 }
-
-export type SvgComponent = SvelteComponent
 
 export default function(options?: Options): Return
