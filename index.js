@@ -22,7 +22,7 @@ function optimizeSvg(content, path, config = {}) {
 }
 
 module.exports = (options = {}) => {
-  const { svgoConfig } = options;
+  const { svgoConfig, requireSuffix = true } = options;
   const svgRegex = /\.svg(?:\?(component))?$/;
   const splitRegex = /(<svg.*?)(\/?>.*)/;
 
@@ -32,7 +32,7 @@ module.exports = (options = {}) => {
       const result = id.match(svgRegex);
       if (result) {
         const type = result[1];
-        if (type === "component") {
+        if (type === "component" || !requireSuffix) {
           const idWithoutQuery = id.replace(".svg?component", ".svg");
           const code = fs.readFileSync(idWithoutQuery);
           let svg = optimizeSvg(code, idWithoutQuery, svgoConfig);
