@@ -1,6 +1,6 @@
 # Vite Svelte SVG
 
-Vite 2.x plugin to transform SVGs into Svelte components.
+Vite 3.x plugin to transform SVGs into Svelte components.
 
 It also optimizes your SVGs by running them thru [svgo](https://github.com/svg/svgo).
 
@@ -54,7 +54,7 @@ module.exports = {
       plugins: [
         svelteSVG({
           svgoConfig: {}, // See https://github.com/svg/svgo#configuration
-          requireSuffix: true // Set false to accept '.svg' without the '?component'
+          requireSuffix: true, // Set false to accept '.svg' without the '?component'
         }),
       ],
     },
