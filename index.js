@@ -9,6 +9,7 @@ function compileSvg(source, filename, ssr) {
     generate: ssr ? "ssr" : "dom",
     dev: process.env.NODE_ENV === "development",
     hydratable: true,
+    css: false,
   });
   return { code };
 }
@@ -28,7 +29,7 @@ module.exports = (options = {}) => {
 
   return {
     name: "svelte-svg",
-    transform(_, id, ssr) {
+    transform(_, id, options) {
       const result = id.match(svgRegex);
       if (result) {
         const type = result[1];
@@ -45,7 +46,7 @@ module.exports = (options = {}) => {
             svg = `${head} {...$$props}${body}`;
           }
           // Compile with Svelte
-          return compileSvg(svg, idWithoutQuery, ssr);
+          return compileSvg(svg, idWithoutQuery, options.ssr);
         }
       }
       return null;
