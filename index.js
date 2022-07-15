@@ -46,7 +46,7 @@ module.exports = (options = {}) => {
             svg = `${head} {...$$props}${body}`;
           }
           // Compile with Svelte
-          return compileSvg(svg, idWithoutQuery, options.ssr);
+          return compileSvg(svg, idWithoutQuery, options?.ssr);
         }
       }
       return null;
