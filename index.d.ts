@@ -1,4 +1,5 @@
 import type { OptimizeOptions } from 'svgo'
+import type { Plugin } from "vite"
 
 type Options = {
 	svgoConfig: OptimizeOptions
@@ -9,9 +10,4 @@ type Options = {
 	requireSuffix: boolean
 }
 
-type Return = {
-	name: string
-	transform: (code: string, id: string, ssr?: boolean) => null|{ code: string }
-}
-
-export default function(options?: Options): Return
+export default function(options?: Options): Plugin
