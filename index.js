@@ -11,7 +11,7 @@ function compileSvg(source, filename, ssr) {
     hydratable: true,
     css: false,
   });
-  return { code };
+  return { code, map: { mappings: '' } };
 }
 
 function optimizeSvg(content, path, config = {}) {
