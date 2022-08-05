@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- Output the sourcemap information to Vite
+
 ### Changed
 
 - Fixed type of plugin return value to corresponding Vite type.

@@ -4,14 +4,14 @@ const svelte = require("svelte/compiler");
 
 function compileSvg(source, filename, ssr) {
   const {
-    js: { code },
+    js: { code, map },
   } = svelte.compile(source, {
     generate: ssr ? "ssr" : "dom",
     dev: process.env.NODE_ENV === "development",
     hydratable: true,
     css: false,
   });
-  return { code };
+  return { code, map };
 }
 
 function optimizeSvg(content, path, config = {}) {
