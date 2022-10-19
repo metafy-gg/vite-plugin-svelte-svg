@@ -43,10 +43,10 @@ pnpm add -D vite-plugin-svelte-svg
 
 ## Setup
 
-### `svelte.config.cjs`
+### `svelte.config.js`
 
 ```js
-const svelteSVG = require("vite-plugin-svelte-svg");
+import svelteSVG from "vite-plugin-svelte-svg";
 
 module.exports = {
   kit: {
@@ -59,6 +59,21 @@ module.exports = {
       ],
     },
   },
+};
+```
+
+### `vite.config.js`
+
+```js
+import svelteSVG from "vite-plugin-svelte-svg";
+
+export default {
+  plugins: [
+    svelteSVG({
+      svgoConfig: {}, // See https://github.com/svg/svgo#configuration
+      requireSuffix: true, // Set false to accept '.svg' without the '?component'
+    }),
+  ],
 };
 ```
 
