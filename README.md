@@ -8,7 +8,9 @@ It also optimizes your SVGs by running them thru [svgo](https://github.com/svg/s
 
 ```svelte
 <script>
-  import MyIcon from '$lib/assets/my-icon.svg?component';
+  import MyIcon from '$lib/assets/my-icon.svg';
+  // Also accepts paths ending in "?component" or "?c":
+  // or import MyIcon from '$lib/assets/my-icon.svg?component';
   // or import MyIcon from '$lib/assets/my-icon.svg?c';
 </script>
 
@@ -53,7 +55,6 @@ export default {
   plugins: [
     svelteSVG({
       svgoConfig: {}, // See https://github.com/svg/svgo#configuration
-      requireSuffix: true, // Set false to accept '.svg' without the '?component'
     }),
   ],
 };
