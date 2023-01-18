@@ -9,6 +9,7 @@ It also optimizes your SVGs by running them thru [svgo](https://github.com/svg/s
 ```svelte
 <script>
   import MyIcon from '$lib/assets/my-icon.svg?component';
+  // or import MyIcon from '$lib/assets/my-icon.svg?c';
 </script>
 
 <MyIcon width={42} height={42} />

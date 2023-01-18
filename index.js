@@ -24,7 +24,8 @@ function optimizeSvg(content, path, config = {}) {
 
 module.exports = (options = {}) => {
   const { svgoConfig, requireSuffix = true } = options;
-  const svgRegex = /\.svg(?:\?(component))?$/;
+  // Matches `*.svg`, `*.svg?component`, `*.svg?c`
+  const svgRegex = /\.svg(?:\?(component))?(?:\?(c))?$/;
   const splitRegex = /(<svg.*?)(\/?>.*)/;
 
   return {
@@ -34,13 +35,18 @@ module.exports = (options = {}) => {
       if (result) {
         const type = result[1];
         if (type === "component" || !requireSuffix) {
-          const idWithoutQuery = id.replace(".svg?component", ".svg");
+          const idWithoutQuery = id
+            .replace(".svg?component", ".svg")
+            .replace(".svg?c", ".svg");
           const code = fs.readFileSync(idWithoutQuery);
           let svg = optimizeSvg(code, idWithoutQuery, svgoConfig);
           // Support any custom attributes
           const parts = splitRegex.exec(svg);
           if (parts === null) {
-            console.error("[vite-plugin-svelte-svg] Failed to parse:", idWithoutQuery);
+            console.error(
+              "[vite-plugin-svelte-svg] Failed to parse:",
+              idWithoutQuery
+            );
           } else {
             const [_, head, body] = parts;
             svg = `${head} {...$$props}${body}`;
