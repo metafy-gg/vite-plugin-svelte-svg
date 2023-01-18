@@ -32,28 +32,25 @@ module.exports = (options = {}) => {
     name: "svelte-svg",
     transform(_, id, options) {
       const result = id.match(svgRegex);
-      if (result) {
-        const type = result[1];
-        if (type === "component" || !requireSuffix) {
-          const idWithoutQuery = id
-            .replace(".svg?component", ".svg")
-            .replace(".svg?c", ".svg");
-          const code = fs.readFileSync(idWithoutQuery);
-          let svg = optimizeSvg(code, idWithoutQuery, svgoConfig);
-          // Support any custom attributes
-          const parts = splitRegex.exec(svg);
-          if (parts === null) {
-            console.error(
-              "[vite-plugin-svelte-svg] Failed to parse:",
-              idWithoutQuery
-            );
-          } else {
-            const [_, head, body] = parts;
-            svg = `${head} {...$$props}${body}`;
-          }
-          // Compile with Svelte
-          return compileSvg(svg, idWithoutQuery, options?.ssr);
+      if (result && (result[1] === "component" || result[2] === "c" || !requireSuffix)) {
+        const idWithoutQuery = id
+          .replace(".svg?component", ".svg")
+          .replace(".svg?c", ".svg");
+        const code = fs.readFileSync(idWithoutQuery);
+        let svg = optimizeSvg(code, idWithoutQuery, svgoConfig);
+        // Support any custom attributes
+        const parts = splitRegex.exec(svg);
+        if (parts === null) {
+          console.error(
+            "[vite-plugin-svelte-svg] Failed to parse:",
+            idWithoutQuery
+          );
+        } else {
+          const [_, head, body] = parts;
+          svg = `${head} {...$$props}${body}`;
         }
+        // Compile with Svelte
+        return compileSvg(svg, idWithoutQuery, options?.ssr);
       }
       return null;
     },
