@@ -4,7 +4,7 @@ import type { Plugin } from "vite"
 type Options = {
 	svgoConfig: OptimizeOptions
 	/**
-	 * Requires the use of ".svg?component" instead of just ".svg"
+	 * Requires the use of ".svg?component" or ".svg?c" instead of just ".svg"
 	 * @default true
 	 */
 	requireSuffix: boolean
