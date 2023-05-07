@@ -10,6 +10,7 @@ function compileSvg(source, filename, ssr) {
     dev: process.env.NODE_ENV === "development",
     hydratable: true,
     css: false,
+    namespace: "svg",
   });
   return { code, map };
 }
