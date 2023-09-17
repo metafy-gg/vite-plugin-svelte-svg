@@ -9,7 +9,7 @@ function compileSvg(source, filename, ssr) {
     generate: ssr ? "ssr" : "dom",
     dev: process.env.NODE_ENV === "development",
     hydratable: true,
-    css: false,
+    css: 'external',
   });
   return { code, map };
 }
